@@ -1,0 +1,45 @@
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+.handwriting { font-family: 'Dancing Script', cursive; }
+body { background:#0a0a0a; color:#fff; }
+
+/* HOME PAGE */
+#homePage { height:100vh; background:url('https://images.unsplash.com/photo-1507699622104-4be3abd695fe?w=1200') center/cover; position:relative; display:flex; align-items:center; justify-content:center; text-align:center; }
+.home-overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(rgba(0,0,0,0.8), rgba(30,58,138,0.8)); }
+.home-content { position:relative; z-index:2; }
+.home-logo { font-size:5em; color:gold; }
+.home-content h1 { font-size:3.5em; color:gold; }
+.tagline { font-size:1.2em; margin:10px 0 20px; }
+.btn-enter, .btn-alt { background:gold; color:#1e3a8a; font-size:1.1em; padding:14px 30px; border:none; border-radius:30px; cursor:pointer; margin:8px; font-weight:bold; }
+.btn-alt { background:transparent; border:2px solid gold; color:gold; }
+
+/* NAVBAR */
+.navbar { background:#1e3a8a; padding:12px 20px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:1000; }
+.navbar nav { display:flex; gap:20px; }
+.navbar nav a { color:white; cursor:pointer; font-weight:600; }
+.notification-icon { font-size:1.5em; cursor:pointer; }
+
+/* TABS */
+.tab-content { padding:20px; max-width:1200px; margin:auto; }
+.video-player iframe { width:100%; height:500px; border-radius:12px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:20px; }
+.card { background:#1a1a1a; border-radius:10px; overflow:hidden; cursor:pointer; transition:0.3s; }
+.card:hover { transform:scale(1.03); }
+.card img { width:100%; height:160px; object-fit:cover; }
+.card h3, .card p { padding:10px; }
+
+.radio-player { text-align:center; background:#1a1a1a; padding:20px; border-radius:12px; }
+.radio-player audio { width:100%; margin:15px 0; }
+.schedule { text-align:left; margin-top:15px; }
+
+.news-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px; }
+.news-card { background:#1a1a1a; padding:15px; border-radius:10px; border-left:4px solid gold; }
+
+.give-box { background:#1e3a8a; padding:25px; border-radius:12px; text-align:center; }
+.btn-ecocash { background:#25D366; color:white; border:none; padding:12px 25px; margin:8px; border-radius:25px; cursor:pointer; font-size:1em; }
+
+.events-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:15px; }
+.event-card { background:#1a1a1a; padding:15px; border-radius:8px; border-left:4px solid gold; }
+
+.section { padding:20px; max-width:1200px; margin:auto; }
+footer { background:#1e3a8a; text-align:center; padding:30px; margin-top:40px; }
+footer a { color:gold; }
