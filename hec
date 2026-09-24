@@ -1,1 +1,380 @@
-as
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEC - Harare Evangelical Church</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue: #1e3a8a;
+  --gold: #facc15;
+  --dark: #0a0f1f;
+  --white: #fff;
+}
+*{margin:0; padding:0; box-sizing:border-box;}
+body{background:linear-gradient(135deg, #0a0f1f 0%, #1e3a8a 50%, #0a0f1f 100%); background-attachment:fixed; color:var(--white); font-family:'Poppins', sans-serif; overflow-x:hidden;}
+
+/* HOME */
+#homePage{height:100vh; display:flex; justify-content:center; align-items:center; text-align:center; position:relative; background:radial-gradient(circle at center, rgba(250,204,21,0.1) 0%, transparent 70%);}
+.home-content{padding:20px; max-width:700px;}
+.home-logo{font-size:5em; color:var(--gold); margin-bottom:15px; animation:float 3s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+.handwriting{font-family:'Dancing Script', cursive; font-size:3.2em; color:var(--gold);}
+.tagline{font-size:1.8em; margin:10px 0; font-weight:600;}
+.btn-enter{background:var(--gold); color:#000; border:none; padding:14px 30px; border-radius:30px; font-weight:700; font-size:1em; cursor:pointer; transition:0.3s; margin-top:15px;}
+.btn-enter:hover{background:#fff; transform:scale(1.05); box-shadow:0 0 20px var(--gold);}
+.credit{font-size:0.9em; margin-top:15px; font-family:'Dancing Script', cursive;}
+
+/* MAIN */
+#mainApp{display:none;}
+.navbar{display:flex; justify-content:space-between; align-items:center; padding:15px 30px; background:rgba(0,0,0,0.6); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; flex-wrap:wrap; gap:10px;}
+.navbar .logo{font-size:1.4em; color:var(--gold); display:flex; align-items:center; gap:8px; font-weight:700;}
+.navbar nav{display:flex; gap:18px; flex-wrap:wrap;}
+.navbar nav a{color:#fff; text-decoration:none; cursor:pointer; font-weight:600; transition:0.3s;}
+.navbar nav a:hover{color:var(--gold);}
+.notification-icon{cursor:pointer; font-size:1.2em;}
+
+.tab-content{padding:50px 20px; max-width:1200px; margin:auto; display:none;}
+.tab-content.active{display:block; animation:fadeIn 0.5s;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:translateY(0)}}
+h2{margin-bottom:25px; color:var(--gold); font-size:2em; text-align:center;}
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:25px;}
+.card, .news-card, .event-card{background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:15px; padding:18px; backdrop-filter:blur(10px); transition:0.3s;}
+.card:hover, .news-card:hover, .event-card:hover{transform:translateY(-6px); border-color:var(--gold); box-shadow:0 0 20px rgba(250,204,21,0.2);}
+.card img{width:100%; border-radius:10px; margin-bottom:10px;}
+.video-player iframe{width:100%; height:500px; border-radius:15px; border:none;}
+.now-streaming{margin-top:15px; text-align:center;}
+
+.about-box{background:rgba(255,255,255,0.08); padding:35px; border-radius:20px; border:1px solid rgba(255,255,255,0.15); line-height:1.9;}
+.about-box h3{color:var(--gold); margin-bottom:10px;}
+.fb-link{color:var(--gold); text-decoration:none; display:inline-block; margin-top:10px;}
+
+.give-box{text-align:center; background:rgba(255,255,255,0.08); padding:35px; border-radius:20px; border:1px solid rgba(255,255,255,0.15);}
+.give-box input{padding:12px; border-radius:10px; border:none; margin:10px; width:200px; text-align:center;}
+.give-box .btn{background:var(--gold); color:#000; border:none; padding:12px 25px; border-radius:10px; cursor:pointer; font-weight:700;}
+.merchant{margin-top:15px;}
+
+footer{text-align:center; padding:35px 20px; background:#000; margin-top:50px; border-top:1px solid rgba(255,255,255,0.1);}
+footer a{color:var(--gold); text-decoration:none; margin:0 10px;}
+.socials{margin-top:10px;}
+
+#searchSermon{padding:12px; width:100%; border-radius:10px; border:none; margin-bottom:20px; background:rgba(255,255,255,0.1); color:#fff;}
+
+/* ADMIN */
+.admin-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px;}
+.admin-card{background:rgba(255,255,255,0.08); padding:20px; border-radius:15px; border:1px solid rgba(255,255,255,0.15);}
+.admin-card input, .admin-card textarea{width:100%; padding:10px; margin:8px 0; border-radius:8px; border:none; background:rgba(255,255,255,0.1); color:#fff;}
+.admin-card textarea{min-height:80px; resize:vertical;}
+.admin-item{display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.05); padding:10px; border-radius:10px; margin:8px 0;}
+.admin-item button{background:#ef4444; border:none; color:#fff; padding:5px 10px; border-radius:5px; cursor:pointer;}
+
+@media(max-width:768px){
+  .navbar nav{gap:10px; font-size:0.9em;}
+  .video-player iframe{height:250px;}
+  .handwriting{font-size:2.2em;}
+}
+</style>
+</head>
+<body>
+
+<!-- SPLASH HOME -->
+<div id="homePage">
+    <div class="home-content">
+        <i class="fa-solid fa-cross home-logo"></i>
+        <h1 class="handwriting">Harare Evangelical Church</h1>
+        <h2 class="tagline">Anchored In Christ</h2>
+        <p>In doctrine and devotion, Harare Evangelical Church stands as a branch of the Evangelical Church of Zimbabwe.</p>
+        <div class="home-buttons">
+            <button class="btn-enter" onclick="enterApp()"><i class="fa-solid fa-play"></i> Watch Live</button>
+        </div>
+        <p class="credit">Developed by <b>Chigombe Asher</b></p>
+    </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="mainApp">
+<header class="navbar">
+    <div class="logo"><i class="fa-solid fa-cross"></i> <span>HEC</span></div>
+    <nav>
+        <a onclick="showTab('live')"><i class="fa-solid fa-broadcast-tower"></i> Live</a>
+        <a onclick="showTab('tv')"><i class="fa-solid fa-tv"></i> TV</a>
+        <a onclick="showTab('news')"><i class="fa-solid fa-newspaper"></i> News</a>
+        <a onclick="showTab('sermons')"><i class="fa-solid fa-bible"></i> Sermons</a>
+        <a onclick="showTab('about')"><i class="fa-solid fa-church"></i> About</a>
+        <a onclick="showTab('give')"><i class="fa-solid fa-hand-holding-dollar"></i> Give</a>
+        <a href="https://www.facebook.com/HarareEvangelicalChurch" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+        <a onclick="showTab('adminLogin')" title="Admin"><i class="fa-solid fa-user-shield"></i></a>
+    </nav>
+    <i class="fa-solid fa-bell notification-icon" onclick="showNotifications()"></i>
+</header>
+
+<main>
+<!-- LIVE -->
+<section id="liveTab" class="tab-content active">
+    <h2><i class="fa-solid fa-broadcast-tower"></i> HEC Live</h2>
+    <div class="video-player">
+        <iframe src="https://www.youtube.com/embed/live_stream?channel=UC_x5XG1OV2P6uZZ5FSM9Ttw" allowfullscreen></iframe>
+    </div>
+    <button class="btn-enter"><i class="fa-solid fa-bell"></i> Get Notified When We Go Live</button>
+    <p class="now-streaming">Now Streaming: Sunday Service - Pastor Mupudzi</p>
+</section>
+
+<!-- TV -->
+<section id="tvTab" class="tab-content">
+    <h2><i class="fa-solid fa-tv"></i> HEC TV</h2>
+    <div class="grid" id="tvFeed"></div>
+</section>
+
+<!-- NEWS -->
+<section id="newsTab" class="tab-content">
+    <h2><i class="fa-solid fa-newspaper"></i> HEC News</h2>
+    <div id="newsFeed" class="grid"></div>
+</section>
+
+<!-- SERMONS -->
+<section id="sermonsTab" class="tab-content">
+    <h2><i class="fa-solid fa-bible"></i> Sermons</h2>
+    <input type="text" placeholder="Search sermons..." id="searchSermon" onkeyup="searchSermons()">
+    <div id="sermonFeed" class="grid"></div>
+</section>
+
+<!-- ABOUT -->
+<section id="aboutTab" class="tab-content">
+    <h2><i class="fa-solid fa-church"></i> About HEC</h2>
+    <div class="about-box">
+        <h3>Harare Evangelical Church</h3>
+        <p><b>Motto:</b> Anchored In Christ</p>
+        <p>Harare Evangelical Church is a vibrant, Christ-centered ministry under the Evangelical Church of Zimbabwe. We are committed to raising disciples, transforming families, and reaching 1 million souls for Christ.</p>
+        <p><b>Our Mission:</b> To preach the Gospel, make disciples, and build people of character and destiny.</p>
+        <p><b>Location:</b> Corner 3rd Mzengeli, Mbare, Harare</p>
+        <p><b>Contact:</b> info@hec.org.zw | +263 71 390 9427</p>
+        <a href="https://www.facebook.com/HarareEvangelicalChurch" target="_blank" class="fb-link"><i class="fa-brands fa-facebook"></i> Follow us on Facebook</a>
+    </div>
+</section>
+
+<!-- GIVE -->
+<section id="giveTab" class="tab-content">
+    <h2><i class="fa-solid fa-hand-holding-dollar"></i> Give & Offerings</h2>
+    <div class="give-box">
+        <h3>Support The Work of God</h3>
+        <p>"And my God will supply every need of yours according to his riches in glory"</p>
+        <b>Philippians 4:19</b>
+        <input type="number" id="customAmount" placeholder="Custom Amount $">
+        <button class="btn" onclick="payEcoCash()">Give via EcoCash</button>
+        <p class="merchant">Merchant: 0772464970 | Harare Evangelical Church</p>
+    </div>
+</section>
+
+<!-- EVENTS -->
+<section id="eventsTab" class="tab-content">
+    <h2><i class="fa-solid fa-calendar"></i> Upcoming Events</h2>
+    <div id="eventsFeed" class="grid"></div>
+</section>
+
+<!-- ADMIN LOGIN -->
+<section id="adminLoginTab" class="tab-content">
+    <h2><i class="fa-solid fa-lock"></i> Admin Login</h2>
+    <div class="give-box">
+        <p>Enter Admin Password</p>
+        <input type="password" id="adminPass" placeholder="Password">
+        <button class="btn" onclick="adminLogin()">Login</button>
+        <p style="font-size:0.8em; margin-top:10px;">Default password: hecadmin2026</p>
+    </div>
+</section>
+
+<!-- ADMIN PANEL -->
+<section id="adminTab" class="tab-content">
+    <h2><i class="fa-solid fa-gear"></i> HEC Admin Panel</h2>
+    <button class="btn" onclick="adminLogout()" style="background:#ef4444; color:#fff; margin-bottom:20px;">Logout</button>
+    <div class="admin-grid">
+        <div class="admin-card">
+            <h3><i class="fa-solid fa-newspaper"></i> Post News</h3>
+            <input type="text" id="newsTitle" placeholder="News Title">
+            <input type="text" id="newsDate" placeholder="Date e.g 22 Aug 2026">
+            <textarea id="newsContent" placeholder="News Content"></textarea>
+            <button class="btn" onclick="addNews()">Post News</button>
+        </div>
+        <div class="admin-card">
+            <h3><i class="fa-solid fa-bible"></i> Add Sermon</h3>
+            <input type="text" id="sermonTitle" placeholder="Sermon Title">
+            <input type="text" id="sermonPreacher" placeholder="Preacher Name">
+            <input type="text" id="sermonVideo" placeholder="YouTube Video Link">
+            <button class="btn" onclick="addSermon()">Add Sermon</button>
+        </div>
+        <div class="admin-card">
+            <h3><i class="fa-solid fa-calendar"></i> Add Event</h3>
+            <input type="text" id="eventTitle" placeholder="Event Title">
+            <input type="text" id="eventDate" placeholder="Event Date">
+            <input type="text" id="eventLocation" placeholder="Location">
+            <button class="btn" onclick="addEvent()">Add Event</button>
+        </div>
+    </div>
+    <h3 style="margin-top:30px; color:var(--gold);">Manage Content</h3>
+    <div id="adminContentList"></div>
+</section>
+</main>
+
+<footer>
+    <p>© 2026 Harare Evangelical Church | Anchored In Christ</p>
+    <p>Corner 3rd Mzengeli, Mbare, Harare</p>
+    <p>info@hec.org.zw | +263 71 390 9427</p>
+    <div class="socials">
+        Follow Us: 
+        <a href="https://www.facebook.com/HarareEvangelicalChurch" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+</footer>
+</div>
+
+<script>
+const ADMIN_PASS = "hecadmin2026"; // CHANGE THIS!
+
+let news = JSON.parse(localStorage.getItem('hec_news')) || [
+    {title:"Ruwadzano District Conference 2026 Announced", date:"12 Aug 2026", content:"HEC to host 100 delegates in Harare"},
+    {title:"New Church Plant in Aspindale", date:"10 Aug 2026", content:"HEC opens 5th assembly in West Harare"}
+];
+let sermons = JSON.parse(localStorage.getItem('hec_sermons')) || [
+    {title:"Anchored In Christ", preacher:"Pastor Mupudzi", video:"#"},
+    {title:"The Power of Faith", preacher:"Elder Baureni", video:"#"}
+];
+let events = JSON.parse(localStorage.getItem('hec_events')) || [
+    {title:"Harare & Chitungwiza Y-Crew Get-together", date:"29 Aug 2026", location:"HEC | Mbare"}
+];
+let tv = [
+    {title:"Y-Crew Get-together", preacher:"HEC Y-Crew", img:"https://images.unsplash.com/photo-1507699622104-4be3abd695fe?w=400"},
+    {title:"Praise & Worship", preacher:"HEC Praise Team", img:"https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400"}
+];
+
+function saveAll(){
+    localStorage.setItem('hec_news', JSON.stringify(news));
+    localStorage.setItem('hec_sermons', JSON.stringify(sermons));
+    localStorage.setItem('hec_events', JSON.stringify(events));
+}
+
+function enterApp() {
+    document.getElementById('homePage').style.display='none';
+    document.getElementById('mainApp').style.display='block';
+    showTab('live');
+}
+function showTab(tab) {
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+    document.getElementById(tab+'Tab').classList.add('active');
+    window.scrollTo(0,0);
+    if(tab === 'admin') loadAdminList();
+}
+
+function loadContent() {
+    document.getElementById('newsFeed').innerHTML = news.map(n=>`<div class="news-card"><h3>${n.title}</h3><small>${n.date}</small><p>${n.content}</p></div>`).join('');
+    document.getElementById('sermonFeed').innerHTML = sermons.map(s=>`<div class="card"><img src="https://images.unsplash.com/photo-1507699622104-4be3abd695fe?w=400"><h3>${s.title}</h3><p>${s.preacher}</p></div>`).join('');
+    document.getElementById('eventsFeed').innerHTML = events.map(e=>`<div class="event-card"><h4>${e.title}</h4><p><i class="fa-solid fa-calendar-day"></i> ${e.date}</p><p><i class="fa-solid fa-location-dot"></i> ${e.location}</p></div>`).join('');
+    document.getElementById('tvFeed').innerHTML = tv.map(t=>`<div class="card"><img src="${t.img}"><h3>${t.title}</h3><p>${t.preacher}</p></div>`).join('');
+}
+loadContent();
+
+function searchSermons() {
+    let term = document.getElementById('searchSermon').value.toLowerCase();
+    let filtered = sermons.filter(s=>s.title.toLowerCase().includes(term) || s.preacher.toLowerCase().includes(term));
+    document.getElementById('sermonFeed').innerHTML = filtered.map(s=>`<div class="card"><img src="https://images.unsplash.com/photo-1507699622104-4be3abd695fe?w=400"><h3>${s.title}</h3><p>${s.preacher}</p></div>`).join('');
+}
+function payEcoCash() {
+    let amount = document.getElementById('customAmount').value;
+    if(!amount || amount <= 0){alert("Please enter a valid amount"); return;}
+    let merchant = "0772464970";
+    let url = `https://www.ecocash.co.zw/collect?merchant=${merchant}&amount=${amount}&reference=HEC Offering`;
+    if(confirm(`Give $${amount} to Harare Evangelical Church?`)) window.open(url, '_blank');
+}
+function showNotifications() {alert("🔔 New: Sunday Service is Live Now!\n🔔 New Sermon: Anchored In Christ uploaded");}
+
+// ADMIN
+function adminLogin(){
+    let pass = document.getElementById('adminPass').value;
+    if(pass === ADMIN_PASS){
+        localStorage.setItem('hec_admin_loggedin', 'true');
+        showTab('admin');
+        loadAdminList();
+    } else {alert("Wrong Password!");}
+}
+function adminLogout(){
+    localStorage.removeItem('hec_admin_loggedin');
+    showTab('live');
+}
+function addNews(){
+    let title = document.getElementById('newsTitle').value;
+    let date = document.getElementById('newsDate').value;
+    let content = document.getElementById('newsContent').value;
+    if(!title || !date || !content) return alert("Fill all fields");
+    news.unshift({title, date, content}); saveAll(); loadContent(); loadAdminList();
+    alert("News Posted!"); document.getElementById('newsTitle').value = ''; document.getElementById('newsContent').value = '';
+}
+function addSermon(){
+    let title = document.getElementById('sermonTitle').value;
+    let preacher = document.getElementById('sermonPreacher').value;
+    let video = document.getElementById('sermonVideo').value;
+    if(!title || !preacher) return alert("Fill all fields");
+    sermons.unshift({title, preacher, video}); saveAll(); loadContent(); loadAdminList();
+    alert("Sermon Added!");
+}
+function addEvent(){
+    let title = document.getElementById('eventTitle').value;
+    let date = document.getElementById('eventDate').value;
+    let location = document.getElementById('eventLocation').value;
+    if(!title || !date || !location) return alert("Fill all fields");
+    events.unshift({title, date, location}); saveAll(); loadContent(); loadAdminList();
+    alert("Event Added!");
+}
+function deleteItem(type, index){
+    if(confirm("Delete this item?")){
+        if(type === 'news') news.splice(index,1);
+        if(type === 'sermon') sermons.splice(index,1);
+        if(type === 'event') events.splice(index,1);
+        saveAll(); loadContent(); loadAdminList();
+    }
+}
+function loadAdminList(){
+    let html = "<h4>News</h4>";
+    html += news.map((n,i)=>`<div class="admin-item"><span>${n.title}</span><button onclick="deleteItem('news',${i})">Delete</button></div>`).join('');
+    html += "<h4 style='margin-top:15px;'>Sermons</h4>";
+    html += sermons.map((s,i)=>`<div class="admin-item"><span>${s.title}</span><button onclick="deleteItem('sermon',${i})">Delete</button></div>`).join('');
+    html += "<h4 style='margin-top:15px;'>Events</h4>";
+    html += events.map((e,i)=>`<div class="admin-item"><span>${e.title}</span><button onclick="deleteItem('event',${i})">Delete</button></div>`).join('');
+    document.getElementById('adminContentList').innerHTML = html;
+}
+console.log("%c HEC Website Designed by Chigombe Asher ", "background: #1e3a8a; color: gold; font-size: 14px;");
+</script>
+<script>
+const ADMIN_PASS = "hecadmin2026"; // CHANGE THIS!
+
+let news = JSON.parse(localStorage.getItem('hec_news')) || [
+    {title:"Ruwadzano District Conference 2026 Announced", date:"12 Aug 2026", content:"HEC to host 100 delegates in Harare"},
+    {title:"New Church Plant in Aspindale", date:"10 Aug 2026", content:"HEC opens 5th assembly in West Harare"}
+];
+let sermons = JSON.parse(localStorage.getItem('hec_sermons')) || [
+    {title:"Anchored In Christ", preacher:"Pastor Mupudzi", video:"#"},
+    {title:"The Power of Faith", preacher:"Elder Baureni", video:"#"}
+];
+let events = JSON.parse(localStorage.getItem('hec_events')) || [
+    {title:"Harare & Chitungwiza Y-Crew Get-together", date:"29 Aug 2026", location:"HEC | Mbare"}
+];
+let tv = [
+    {title:"Y-Crew Get-together", preacher:"HEC Y-Crew", img:"https://images.unsplash.com/photo-1507699622104-4be3abd695fe?w=400"},
+    {title:"Praise & Worship", preacher:"HEC Praise Team", img:"https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400"}
+];
+
+function saveAll(){
+    localStorage.setItem('hec_news', JSON.stringify(news));
+    localStorage.setItem('hec_sermons', JSON.stringify(sermons));
+    localStorage.setItem('hec_events', JSON.stringify(events));
+}
+
+function enterApp() {
+    document.getElementById('homePage').style.display='none';
+    document.getElementById('mainApp').style.display='block';
+    showTab('live');
+}
+function showTab(tab) {
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+    document.getElementById(tab+'Tab').classList.add('active');
+    window.scrollTo(
